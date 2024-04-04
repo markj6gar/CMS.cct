@@ -20,9 +20,13 @@ public class CMSCct {
      */
     public static void main(String[] args) throws SQLException {
         DBConnector db = new DBConnector();
-    //    db.createDB();      
-    //    db.createTableCourses("Courses");
-        db.addCourse(new Courses("CSC101","Introduction to Computer Science","Computer Science","Dr. Alice Lee","Professor","A101"));
+        // db.createDB();      
+        // db.createTableCourses("Courses");
+        // db.addCourse(new Courses("CSC101","Introduction to Computer Science","Computer Science","Dr. Alice Lee","Professor","A101"));
+        // db.createTableStudents("Students");
+        db.addStudent(new Students ("9852y","Mark Jogar","Introduction to Computer Science","Computer Science"));
+        
+        
        
     
     }
