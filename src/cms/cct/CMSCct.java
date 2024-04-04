@@ -118,7 +118,7 @@ public class CMSCct {
     }
 
     
-    private static void addFeedbackFromFile(DBConnector db, String fileName)  {
+    private static void addFeedbackFromFile(DBConnector db, String fileName) throws SQLException  {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -129,7 +129,7 @@ public class CMSCct {
                 int raiting = Integer.parseInt(data[3].trim());
 
                 // Add feedback to the con
-                db.addGrade (new Feedback (feedback_id, student_id, course_code, raiting));
+                db.addFeedback (new Feedback (feedback_id, student_id, course_code, raiting));
             }
         } catch (IOException e){
             e.printStackTrace();
