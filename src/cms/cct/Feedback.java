@@ -9,20 +9,20 @@ package cms.cct;
  * @author Mark
  */
 public class Feedback {
-    String enrollment_id;
+    String feedback_id;
     String student_id;
     String course_code;
     int raiting;
 
-    public Feedback(String enrollment_id, String student_id, String course_code, int raiting) {
-        this.enrollment_id = enrollment_id;
+    public Feedback(String feedback_id, String student_id, String course_code, int raiting) {
+        this.feedback_id = feedback_id;
         this.student_id = student_id;
         this.course_code = course_code;
         this.raiting = raiting;
     }
 
-    public String getEnrollment_id() {
-        return enrollment_id;
+    public String getFeedback_id() {
+        return feedback_id;
     }
 
     public String getStudent_id() {
@@ -36,6 +36,8 @@ public class Feedback {
     public int getRaiting() {
         return raiting;
     }
+
+   
     
     
     

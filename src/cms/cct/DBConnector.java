@@ -3,6 +3,7 @@ package cms.cct;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -182,4 +183,21 @@ public class DBConnector {
 
         }
     }
+    
+    public Feedback getFb (int raiting) throws SQLException {
+       
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+            stmt.execute("USE cms_cct");
+            ResultSet rs = stmt.executeQuery ("SELECT * from Feedback WHERE raiting < 4");
+            
+            rs.next();
+            String feedback_id = rs.getString("feedback_id");
+            String student_id = rs.getString("student_id");
+            String course_code = rs.getString("course_code");
+            conn.close();
+            return new Feedback( feedback_id, student_id, course_code, raiting); 
+    }
+    
+    
 }
