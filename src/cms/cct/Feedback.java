@@ -9,23 +9,23 @@ package cms.cct;
  * @author Mark
  */
 public class Feedback {
-    String feedback_id;
+    int feedback_id;
     String student_id;
     String course_code;
     int raiting;
 
-    public Feedback(String feedback_id, String student_id, String course_code, int raiting) {
+    public Feedback( int feedback_id, String student_id, String course_code, int raiting) {
         this.feedback_id = feedback_id;
         this.student_id = student_id;
         this.course_code = course_code;
         this.raiting = raiting;
     }
 
-    Feedback(int feedback_id, String student_id, String course_code, int raiting) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+   
 
-    public String getFeedback_id() {
+  
+
+    public int getFeedback_id() {
         return feedback_id;
     }
 

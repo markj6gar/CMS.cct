@@ -30,7 +30,7 @@ public class DBConnector {
                 Statement stmt = conn.createStatement();
                 stmt.execute("CREATE DATABASE CMS_cct;");
                 conn.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
                 
         }
@@ -41,10 +41,10 @@ public class DBConnector {
                 Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
                 Statement stmt = conn.createStatement();
                 stmt.execute("USE cms_cct");
-                stmt.execute("CREATE TABLE " + courses + "(course_code varchar(10) primary key, course_name varchar(100), program_name varchar(100), lecturer_name varchar(50), lecturer_role varchar(15), room varchar(20))");
+                stmt.execute("CREATE TABLE " + courses + "(course_code varchar(20) primary key, course_name varchar(100), program_name varchar(100), lecturer_name varchar(100), lecturer_role varchar(50), room varchar(20))");
                 System.out.println("Courses table sucessfully created");
                 conn.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
                 
         }
@@ -58,7 +58,7 @@ public class DBConnector {
             stmt.execute(String.format("INSERT INTO Courses (course_code, course_name, program_name, lecturer_name, lecturer_role, room) VALUES ('%s', '%s', '%s', '%s' , '%s', '%s')", course.getCourse_code(), course.getCourse_name(), course.getProgram_name(), course.getLecturer_name(), course.getLecturer_role(), course.getRoom()));
             System.out.println("Data added to courses table");
             conn.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         
         }        
@@ -70,9 +70,9 @@ public class DBConnector {
                 Statement stmt = conn.createStatement();
                 stmt.execute("USE cms_cct");
                 stmt.execute("CREATE TABLE " + students + " (student_id varchar(10) primary key, student_name varchar(50),course_name varchar(100), program_name varchar(100));");
-                System.out.println("Student table sucessfully created");
+                System.out.println(students + " table sucessfully created");
                 conn.close();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
                 
         }
@@ -84,9 +84,9 @@ public class DBConnector {
             Statement stmt = conn.createStatement();
             stmt.execute("USE cms_cct");
             stmt.execute(String.format("INSERT INTO Students (student_id, student_name, course_name, program_name) VALUES ('%s', '%s', '%s', '%s')", student.getStudent_id(), student.getStudent_name(), student.getCourse_name(),student.getProgram_name()));
-            System.out.println("Student table, data sucessfully added");
+            System.out.println(student + " data sucessfully added");
             conn.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         
         }        
@@ -98,11 +98,10 @@ public class DBConnector {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             Statement stmt = conn.createStatement();
             stmt.execute("USE cms_cct");
-            stmt.execute("CREATE TABLE " + enrollments + " (enrollment_id INT auto_increment primary key, student_id varchar(10), course_code varchar(10), semester INT, grade INT, foreign key (student_id) references students(student_id),\n" +
-"foreign key (course_code) references courses(course_code));");
+            stmt.execute("CREATE TABLE " + enrollments + " (enrollment_id INT auto_increment primary key, student_id varchar(10), course_code varchar(20), semester INT, grade INT, foreign key (student_id) references students(student_id), foreign key (course_code) references courses(course_code));");
             System.out.println("Enrollments table sucessfully created");
             conn.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
 
         }
@@ -114,10 +113,10 @@ public class DBConnector {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             Statement stmt = conn.createStatement();
             stmt.execute("USE cms_cct");
-            stmt.execute(String.format("INSERT INTO Enrollments (enrollment_id, student_id, course_code, semester, grade) VALUES ('%s', '%s', '%s', %d, %d)", enrollment.getEnrollment_id(), enrollment.getStudent_id(), enrollment.getCourse_code(), enrollment.getSemester(),enrollment.getGrade()));
+            stmt.execute(String.format("INSERT INTO Enrollments (enrollment_id, student_id, course_code, grade) VALUES ('%s', '%s', '%s', %d, %d)", enrollment.getEnrollment_id(), enrollment.getStudent_id(), enrollment.getCourse_code(), enrollment.getSemester(),enrollment.getGrade()));
             System.out.println("Student table, data sucessfully added");
             conn.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
 
         }
@@ -132,7 +131,7 @@ public class DBConnector {
             stmt.execute("CREATE TABLE " + grades + " (grade_id INT auto_increment primary key, enrollment_id INT, grade INT, foreign key (enrollment_id) references enrollments(enrollment_id));");
             System.out.println("Enrollments table sucessfully created");
             conn.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
 
         }
@@ -147,7 +146,7 @@ public class DBConnector {
             stmt.execute(String.format("INSERT INTO Grades (grade_id, enrollment_id, grade) VALUES (%d, %d, %d)", grade.getGrade_id(), grade.getEnrollment_id(), grade.getGrade()));
             System.out.println("Grade table, data sucessfully added");
             conn.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
 
         }
@@ -159,12 +158,10 @@ public class DBConnector {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             Statement stmt = conn.createStatement();
             stmt.execute("USE cms_cct");
-            stmt.execute("CREATE TABLE " + feedback + " (feedback_id INT auto_increment primary key, student_id varchar(10), course_code varchar(10), raiting INT CHECK (raiting between 1 and 5),foreign key (student_id) references students(student_id), foreign key (course_code) references courses(course_code));");
+            stmt.execute("CREATE TABLE " + feedback + " (feedback_id INT auto_increment primary key, student_id varchar(10), course_code varchar(20), raiting INT CHECK (raiting between 1 and 5),foreign key (student_id) references students(student_id), foreign key (course_code) references courses(course_code));");
             System.out.println("feedback table sucessfully created");
             conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-
+        } catch (SQLException e) {
         }
     }
     // adding data to the feedback table
@@ -174,29 +171,29 @@ public class DBConnector {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             Statement stmt = conn.createStatement();
             stmt.execute("USE cms_cct");
-            stmt.execute(String.format("INSERT INTO Feedback (feedback_id, student_id, course_code, raiting) VALUES ('%s', '%s', '%s', %d)", fb.getEnrollment_id(), fb.getStudent_id(), fb.getCourse_code(), fb.getRaiting()));
+            stmt.execute(String.format("INSERT INTO Feedback (feedback_id, student_id, course_code, raiting) VALUES ('%s', '%s', '%s', %d)", fb.getFeedback_id(), fb.getStudent_id(), fb.getCourse_code(), fb.getRaiting()));
             System.out.println("feedback table, data sucessfully added");
             conn.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
 
         }
     }
     
-    public Feedback getFb (int raiting) throws SQLException {
-       
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-            Statement stmt = conn.createStatement();
-            stmt.execute("USE cms_cct");
-            ResultSet rs = stmt.executeQuery ("SELECT * from Feedback WHERE raiting < 4");
+//    public Feedback getFb (int raiting) throws SQLException {
+//       
+//            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+//            Statement stmt = conn.createStatement();
+//            stmt.execute("USE cms_cct");
+//            ResultSet rs = stmt.executeQuery ("SELECT * from Feedback WHERE raiting < 4");
             
-            rs.next();
-            String feedback_id = rs.getString("feedback_id");
-            String student_id = rs.getString("student_id");
-            String course_code = rs.getString("course_code");
-            conn.close();
-            return new Feedback( feedback_id, student_id, course_code, raiting); 
-    }
+//            rs.next();
+//            String feedback_id = rs.getString("feedback_id");
+//            String student_id = rs.getString("student_id");
+//            String course_code = rs.getString("course_code");
+//            conn.close();
+//            return new Feedback(feedback_id, student_id, course_code, raiting); 
+//    }
     
     
 }

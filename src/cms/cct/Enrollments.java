@@ -12,8 +12,7 @@ public class Enrollments {
     String enrollment_id;
     String student_id;
     String course_code;
-    int semester;
-    int grade;
+    int semester; int grade;
 
     public Enrollments(String enrollment_id, String student_id, String course_code, int semester, int grade) {
         this.enrollment_id = enrollment_id;

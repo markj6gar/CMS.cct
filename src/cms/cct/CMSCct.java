@@ -8,7 +8,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
-
+import java.lang.NumberFormatException;
 
 
 /**
@@ -23,7 +23,7 @@ public class CMSCct {
      */
     public static void main(String[] args) throws SQLException {
         DBConnector db = new DBConnector();
-        // db.createDB();      
+        db.createDB();      
         db.createTableCourses("Courses");
         db.createTableStudents("Students");
         db.createTableEnrollments("Enrollments");
@@ -85,15 +85,17 @@ public class CMSCct {
                 String enrollment_id   = data[0];
                 String student_id   = data[1];
                 String course_code   = data[2];
-                int semester   = Integer.parseInt(data[3]);
-                int grade   = Integer.parseInt(data[4]);
+                int semester   = Integer.parseInt(data[3].trim());
+                int grade   = Integer.parseInt(data[4].trim());
                 
 
                 // Add course to the database
                 db.addEnrollment(new Enrollments (enrollment_id, student_id, course_code, semester, grade));
             }
-        } catch (IOException |SQLException e){
-            e.printStackTrace();
+        }catch (IOException |SQLException | NumberFormatException e){
+        
+        e.printStackTrace();
+    
         }
     }
         
@@ -102,9 +104,9 @@ public class CMSCct {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
-                int grade_id  = Integer.parseInt(data[0]);
-                int enrollment_id  = Integer.parseInt(data[1]);
-                int grade = Integer.parseInt(data[2]);
+                int grade_id  = Integer.parseInt(data[0].trim());
+                int enrollment_id  = Integer.parseInt(data[1].trim());
+                int grade = Integer.parseInt(data[2].trim());
                 
 
                 // Add course to the database
@@ -121,18 +123,17 @@ public class CMSCct {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
-                int feedback_id   = Integer.parseInt(data[0]);
+                int feedback_id   = Integer.parseInt(data[0].trim());
                 String student_id = data[1];
                 String course_code = data[2];
-                int raiting = Integer.parseInt(data[3]);
+                int raiting = Integer.parseInt(data[3].trim());
 
-                // Add course to the database
+                // Add feedback to the con
                 db.addGrade (new Feedback (feedback_id, student_id, course_code, raiting));
             }
-        } catch (IOException |SQLException e){
+        } catch (IOException e){
             e.printStackTrace();
         }
     }
-    } 
+ } 
 
-}
