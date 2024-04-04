@@ -90,4 +90,96 @@ public class DBConnector {
         
         }        
         }
+        
+        //creating the enrollment table 
+    public void createTableEnrollments(String enrollments) throws SQLException {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+            stmt.execute("USE cms_cct");
+            stmt.execute("CREATE TABLE " + enrollments + " (enrollment_id INT auto_increment primary key, student_id varchar(10), course_code varchar(10), semester INT, grade INT, foreign key (student_id) references students(student_id),\n" +
+"foreign key (course_code) references courses(course_code));");
+            System.out.println("Enrollments table sucessfully created");
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+    // adding data to the enrollment table
+
+    public void addEnrollment(Enrollments enrollment) throws SQLException {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+            stmt.execute("USE cms_cct");
+            stmt.execute(String.format("INSERT INTO Enrollments (enrollment_id, student_id, course_code, semester, grade) VALUES ('%s', '%s', '%s', %d, %d)", enrollment.getEnrollment_id(), enrollment.getStudent_id(), enrollment.getCourse_code(), enrollment.getSemester(),enrollment.getGrade()));
+            System.out.println("Student table, data sucessfully added");
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+    
+        //creating the enrollment table 
+    public void createTableGrades(String grades) throws SQLException {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+            stmt.execute("USE cms_cct");
+            stmt.execute("CREATE TABLE " + grades + " (grade_id INT auto_increment primary key, enrollment_id INT, grade INT, foreign key (enrollment_id) references enrollments(enrollment_id));");
+            System.out.println("Enrollments table sucessfully created");
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+    // adding data to the enrollment table
+
+    public void addGrade (Grades grade) throws SQLException {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+            stmt.execute("USE cms_cct");
+            stmt.execute(String.format("INSERT INTO Grades (grade_id, enrollment_id, grade) VALUES (%d, %d, %d)", grade.getGrade_id(), grade.getEnrollment_id(), grade.getGrade()));
+            System.out.println("Grade table, data sucessfully added");
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+    
+        //creating the feedback table 
+    public void createTableFeedback(String feedback) throws SQLException {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+            stmt.execute("USE cms_cct");
+            stmt.execute("CREATE TABLE " + feedback + " (feedback_id INT auto_increment primary key, student_id varchar(10), course_code varchar(10), raiting INT CHECK (raiting between 1 and 5),foreign key (student_id) references students(student_id),\n" +
+"foreign key (course_code) references courses(course_code));");
+            System.out.println("feedback table sucessfully created");
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+    // adding data to the feedback table
+
+    public void addFeedback(Feedback fb) throws SQLException {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+            stmt.execute("USE cms_cct");
+            stmt.execute(String.format("INSERT INTO Feedback (feedback_id, student_id, course_code, raiting) VALUES ('%s', '%s', '%s', %d)", fb.getEnrollment_id(), fb.getStudent_id(), fb.getCourse_code(), fb.getRaiting()));
+            System.out.println("feedback table, data sucessfully added");
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
 }
