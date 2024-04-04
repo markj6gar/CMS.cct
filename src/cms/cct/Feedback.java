@@ -21,6 +21,10 @@ public class Feedback {
         this.raiting = raiting;
     }
 
+    Feedback(int feedback_id, String student_id, String course_code, int raiting) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public String getFeedback_id() {
         return feedback_id;
     }

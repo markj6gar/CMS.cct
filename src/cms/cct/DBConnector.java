@@ -159,8 +159,7 @@ public class DBConnector {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             Statement stmt = conn.createStatement();
             stmt.execute("USE cms_cct");
-            stmt.execute("CREATE TABLE " + feedback + " (feedback_id INT auto_increment primary key, student_id varchar(10), course_code varchar(10), raiting INT CHECK (raiting between 1 and 5),foreign key (student_id) references students(student_id),\n" +
-"foreign key (course_code) references courses(course_code));");
+            stmt.execute("CREATE TABLE " + feedback + " (feedback_id INT auto_increment primary key, student_id varchar(10), course_code varchar(10), raiting INT CHECK (raiting between 1 and 5),foreign key (student_id) references students(student_id), foreign key (course_code) references courses(course_code));");
             System.out.println("feedback table sucessfully created");
             conn.close();
         } catch (Exception e) {

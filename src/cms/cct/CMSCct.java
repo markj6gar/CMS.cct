@@ -123,7 +123,7 @@ public class CMSCct {
                 String[] data = line.split(",");
                 int feedback_id   = Integer.parseInt(data[0]);
                 String student_id = data[1];
-                String course_code = data[2]);
+                String course_code = data[2];
                 int raiting = Integer.parseInt(data[3]);
 
                 // Add course to the database
