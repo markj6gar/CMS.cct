@@ -1,0 +1,26 @@
+student_id,student_name,course_name,program_name
+100001,Amelia Rodriguez,Introduction to Computer Science,Computer Science
+100002,Christopher Johnson,British Literature,English Literature
+100003,Olivia Brown,Cell Biology,Biology
+100004,William Garcia,World History in the 20th Century,History
+100005,Sophia Miller,Calculus I,Mathematics
+100006,Noah Taylor,Psychology of Learning,Psychology
+100007,Isabella Fernandez,Introduction to Economics,Economics
+100008,Lucas Davis,History of Art I,Art History
+100009,Mia White,Introduction to Sociology,Sociology
+100010,Ethan Garcia,Introduction to Philosophy,Philosophy
+100011,Ava Brown,Data Structures,Computer Science
+100012,Daniel Johnson,Shakespearean Literature,English Literature
+100013,Emily Miller,Genetics,Biology
+100014,Sophia Garcia,American History,History
+100015,William Rodriguez,Calculus II,Mathematics
+100016,Olivia Moore,Abnormal Psychology,Psychology
+100017,Christopher Brown,Macroeconomics,Economics
+100018,Amelia White,Renaissance Art,Art History
+100019,Isabella Davis,Contemporary Sociology,Sociology
+100020,Lucas Fernandez,Logic and Critical Thinking,Philosophy
+100021,Mia Garcia,Algorithms,Computer Science
+100022,Ethan Brown,American Literature,English Literature
+100023,Ava Miller,Evolutionary Biology,Biology
+100024,Daniel Rodriguez,European History,History
+100025,Sophia Moore,Linear Algebra,Mathematics

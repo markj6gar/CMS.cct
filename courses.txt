@@ -1,0 +1,11 @@
+course_code,course_name,program_name,lecturer_name,lecturer_role,room
+CSC101,Introduction to Computer Science,Computer Science,Dr. Alice Lee,Professor,A101
+ENG202,British Literature,English Literature,Mr. David Brown,Lecturer,B203
+BIO303,Cell Biology,Biology,Ms. Sarah Miller,Associate Professor,LAB 405
+HIS404,World History in the 20th Century,History,Dr. Charles Johnson,Professor,C312
+MTH505,Calculus I,Mathematics,Mr. William Garcia,Lecturer,D204
+PSY606,Psychology of Learning,Psychology,Dr. Emily Fernandez,Professor,E102
+ECO707,Introduction to Economics,Economics,Mr. Michael Jones,Lecturer,F401
+ART808,History of Art I,Art History,Ms. Olivia Jackson,Associate Professor,G207
+SOC909,Introduction to Sociology,Sociology,Dr. Daniel Williams,Professor,H310
+PHL1010,Introduction to Philosophy,Philosophy,Mr. Matthew Davis,Lecturer,I106
