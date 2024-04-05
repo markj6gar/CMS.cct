@@ -4,6 +4,8 @@
  */
 package cms.cct;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +38,7 @@ public class UserConsole {
     
     
     //
-    public void start() {
+    public void start() throws IOException {
         System.out.println("Welcome to CCT Course Managament System");
         boolean isLoggedIn = login();
             if(!isLoggedIn) {
@@ -54,7 +56,7 @@ public class UserConsole {
             
             case 1: 
                 if(currentUser.equals("admin")) { //add lecturer and office staff later
-                ReportGenerator();
+               ReportGenerator();
                 } else {
                     System.out.println("Permission denied to admins.");
                 }
@@ -117,22 +119,28 @@ public class UserConsole {
     
 
     
-//    private void ReportGenerator () {
-//    ReportGenerator reportGenerator = new ReportGenerator();
-//    reportGenerator.gene
-//    reportGenerator.generateStudentReport();
-//}
+private void generateReports() throws IOException {
+    System.out.println("Choose a report you would like to generate:");
+    System.out.println("1. Courses Report");
+    System.out.println("2. Student Report");
+    // System.out.println("3. Lecturer Report");
+    System.out.println("Your option: ");
     
-    
-    
-    
-   
-    
-    
-    
-    
-    
-    
+    int reportChoice = getChoice();
+
+    switch (reportChoice) {
+        case 1:
+            reportGen.generateCoursesReport();
+            System.out.println("Courses Report generated successfully.");
+            break;
+        case 2:
+            reportGen.generateStudentsReport();
+            System.out.println("Students Report generated successfully.");
+            break;
+        default:
+            System.out.println("Invalid choice. Please select 1 or 2.");
+    }
+}
     
     
     
@@ -229,7 +237,7 @@ public class UserConsole {
         }
     }
     
-        public static void main(String[] args) {
+        public static void main(String[] args) throws IOException {
         UserConsole console = new UserConsole();
         console.start();
 

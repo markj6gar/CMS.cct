@@ -22,6 +22,8 @@ public class CMSCct {
   
      */
     public static void main(String[] args) throws SQLException {
+        UserConsole console = new UserConsole();
+        console.start();
         DBConnector db = new DBConnector();
         db.createDB();      
         db.createTableCourses("Courses");
@@ -35,6 +37,11 @@ public class CMSCct {
         addEnrollmentsFromFile(db, "enrollments.txt");
         addGradesFromFile(db, "grades.txt");
         addFeedbackFromFile(db, "feedback.txt");
+        
+                
+        
+
+    
     }
         
     private static void addCoursesFromFile(DBConnector db, String fileName)  {
@@ -85,12 +92,11 @@ public class CMSCct {
                 String enrollment_id   = data[0];
                 String student_id   = data[1];
                 String course_code   = data[2];
-                int semester   = Integer.parseInt(data[3].trim());
-                int grade   = Integer.parseInt(data[4].trim());
+
                 
 
                 // Add course to the database
-                db.addEnrollment(new Enrollments (enrollment_id, student_id, course_code, semester, grade));
+                db.addEnrollment(new Enrollments (enrollment_id, student_id, course_code));
             }
         }catch (IOException |SQLException | NumberFormatException e){
         
@@ -135,6 +141,8 @@ public class CMSCct {
             e.printStackTrace();
         }
     }
+    
+    
     
     
  } 

@@ -8,35 +8,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-
 /**
  *
  * @author Mark
  */
-public class ReportGenerator {
-        private void generateReports(List<Courses> courses, List<Students> students, String reportType) {
-        System.out.println("Choose a report you would like to generate:");
-        System.out.println("1. Courses Report");
-        System.out.println("2. Student Report");
-//        System.out.println("3. Lecturer Report");
-        System.out.println("Your optin: ");
-        
-        
-        switch (reportType.toLowerCase()) {
-        case "course": GenerateCoursesReport(courses);
-        break;
-            
-        case "student": GenerateStudentsReport(students);
-        break;
-        
-//        case 3: GenerateLecturerReport();
-//        break;
-        
-        default: System.out.println("Invalid choice. Please input a number in between 1-3");
-     
-        }
-    }
-    
+class ReportGenerator {
     private void GenerateCoursesReport(List<Courses> courses, String format) throws IOException{
            System.out.println("Generating course report...");
         
@@ -99,18 +75,11 @@ public class ReportGenerator {
      
      
      
-     
-     
-     
-     
-     
-     
-     
-     
+
      
      
     // student report generator
-    private void GenerateStudentsReport(List<Students> students, String format) throws IOException {
+    private void generateCoursesReport(List<Students> students, String format) throws IOException {
            System.out.println("Generating course report...");
         
         switch (format.toLowerCase()) {
@@ -170,8 +139,16 @@ public class ReportGenerator {
     
     
     
+    
+    
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
 }
-
-
- 
-

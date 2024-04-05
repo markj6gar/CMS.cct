@@ -12,14 +12,13 @@ public class Enrollments {
     String enrollment_id;
     String student_id;
     String course_code;
-    int semester; int grade;
+   
 
-    public Enrollments(String enrollment_id, String student_id, String course_code, int semester, int grade) {
+    public Enrollments(String enrollment_id, String student_id, String course_code) {
         this.enrollment_id = enrollment_id;
         this.student_id = student_id;
         this.course_code = course_code;
-        this.semester = semester;
-        this.grade = grade;
+       
     }
 
     public String getEnrollment_id() {
@@ -34,13 +33,6 @@ public class Enrollments {
         return course_code;
     }
 
-    public int getSemester() {
-        return semester;
-    }
-
-    public int getGrade() {
-        return grade;
-    }
 
     
     

@@ -3,7 +3,6 @@ package cms.cct;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -98,7 +97,7 @@ public class DBConnector {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             Statement stmt = conn.createStatement();
             stmt.execute("USE cms_cct");
-            stmt.execute("CREATE TABLE " + enrollments + " (enrollment_id INT auto_increment primary key, student_id varchar(10), course_code varchar(20), semester INT, grade INT, foreign key (student_id) references students(student_id), foreign key (course_code) references courses(course_code));");
+            stmt.execute("CREATE TABLE " + enrollments + " (enrollment_id INT auto_increment primary key, student_id varchar(10), course_code varchar(20), foreign key (student_id) references students(student_id), foreign key (course_code) references courses(course_code));");
             System.out.println("Enrollments table sucessfully created");
             conn.close();
         } catch (SQLException e) {
@@ -113,7 +112,7 @@ public class DBConnector {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             Statement stmt = conn.createStatement();
             stmt.execute("USE cms_cct");
-            stmt.execute(String.format("INSERT INTO Enrollments (enrollment_id, student_id, course_code, grade) VALUES ('%s', '%s', '%s', %d, %d)", enrollment.getEnrollment_id(), enrollment.getStudent_id(), enrollment.getCourse_code(), enrollment.getSemester(),enrollment.getGrade()));
+            stmt.execute(String.format("INSERT INTO Enrollments (enrollment_id, student_id, course_code, grade) VALUES ('%s', '%s', '%s', %d, %d)", enrollment.getEnrollment_id(), enrollment.getStudent_id(), enrollment.getCourse_code()));
             System.out.println("Student table, data sucessfully added");
             conn.close();
         } catch (SQLException e) {
