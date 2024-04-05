@@ -7,28 +7,56 @@ package cms.cct;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
  * @author Mark
  */
 public class ReportGenerator {
-    public void chooseCourseReport(List<Courses> courses) {
-        System.out.println("Generating course report...");
+        private void generateReports(List<Courses> courses, List<Students> students, String reportType) {
+        System.out.println("Choose a report you would like to generate:");
+        System.out.println("1. Courses Report");
+        System.out.println("2. Student Report");
+//        System.out.println("3. Lecturer Report");
+        System.out.println("Your optin: ");
         
-        switch (format.toLowerCase()) {
-            case "txt": chooseTxtCoursesReport(courses);
-            break;
-            case "csv": chooseCsvCoursesReport(courses);
-            break;
-            case "consule": chooseConsuleCoursesReport(courses);
-            break;
-            default: System.out.println("Invalid format");
+        
+        switch (reportType.toLowerCase()) {
+        case "course": GenerateCoursesReport(courses);
+        break;
+            
+        case "student": GenerateStudentsReport(students);
+        break;
+        
+//        case 3: GenerateLecturerReport();
+//        break;
+        
+        default: System.out.println("Invalid choice. Please input a number in between 1-3");
+     
         }
     }
-    private void generateTxtCourseReport {
+    
+    private void GenerateCoursesReport(List<Courses> courses, String format) throws IOException{
+           System.out.println("Generating course report...");
+        
+        switch (format.toLowerCase()) {
+            case "txt":
+                generateTxtCoursesReport(courses);
+                break;
+            case "csv":
+                generateCsvCoursesReport(courses);
+                break;
+            case "console":
+                generateConsoleCoursesReport(courses);
+                break;
+            default:
+                System.out.println("Invalid format");
+    }    
+        
+    }    
+    
+    private void generateTxtCoursesReport (List<Courses> courses) {
     try (FileWriter writer = new FileWriter("course_report.txt")) {
         for (Courses course: courses) {
             writer.write("Course name: " + course.getCourse_name() + "\n");
@@ -38,15 +66,106 @@ public class ReportGenerator {
             writer.write( "--------------------------------------\n");
         }
             System.out.println("Course Report has been saved as course_report.txt");
-    }   catch (IOException ex) {
+    }   catch (IOException e) {
             e.printStackTrace();
         }
     }
             
-    private void generateCsvCourseReport {
+    private void generateCsvCoursesReport (List<Courses> courses) throws IOException {
     try (FileWriter writer = new FileWriter("course_report.csv")) {
+        writer.write ("Course name, Program, Lecturer, Course, Room\n");
+        for(Courses course : courses) {
+            writer.write(course.getCourse_name() + "," + course.getProgram_name() + "," + course.getLecturer_name() + "," + course.getRoom() + "\n");
+        }
+        System.out.println("Course Report has been saved as course_report.csv");
+            
+        }
+    }
+    
+     private void generateConsoleCoursesReport (List<Courses> courses) {
+         System.out.println("Course report");
+        for(Courses course : courses) {
+            System.out.println("Course name: " + course.getCourse_name());
+            System.out.println("Program: " + course.getProgram_name());
+            System.out.println("Lecturer: " + course.getLecturer_name());
+            System.out.println("Course Room: " + course.getRoom());
+            System.out.println("-----------------------------------------");
     
     
+    }
+    
+}
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+    // student report generator
+    private void GenerateStudentsReport(List<Students> students, String format) throws IOException {
+           System.out.println("Generating course report...");
+        
+        switch (format.toLowerCase()) {
+            case "txt":
+                generateTxtStudentsReport(students);
+                break;
+            case "csv":
+                generateCsvStudentsReport(students);
+                break;
+            case "console":
+                generateConsoleStudentsReport(students);
+                break;
+            default:
+                System.out.println("Invalid format");
+    }    
+        
+    }    
+    
+    private void generateTxtStudentsReport (List<Students> students) {
+    try (FileWriter writer = new FileWriter("student_report.txt")) {
+        for (Students student: students) {
+            writer.write("Student name: " + student.getStudent_name() + "\n");
+            writer.write("Student ID: " + student.getStudent_id() + "\n");
+            writer.write("Course name: " + student.getCourse_name() + "\n");
+            writer.write("Program: " + student.getProgram_name() + "\n");
+        }
+            System.out.println("Student Report has been saved as student_report.txt");
+    }   catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+            
+    private void generateCsvStudentsReport (List<Students> students) throws IOException  {
+    try (FileWriter writer = new FileWriter("student_report.csv")) {
+        writer.write ("Student name, Student ID, Course, Program\n");
+        for(Students student : students) {
+            writer.write(student.getStudent_name()+ "," + student.getStudent_id() + "," + student.getCourse_name() + "," + student.getProgram_name() +"\n");
+        }
+        System.out.println("Student Report has been saved as student_report.csv");
+            
+        }
+    }
+    
+     private void generateConsoleStudentsReport (List<Students> students) {
+         System.out.println("Student report");
+        for (Students student: students) {
+            System.out.println("Student name: " + student.getStudent_name() + "\n");
+            System.out.println("Student ID: " + student.getStudent_id());
+            System.out.println("Course name: " + student.getCourse_name());
+            System.out.println("Program: " + student.getProgram_name());
+            System.out.println("-----------------------------------------");
+    
+    
+    }
+    }
     
     
     
